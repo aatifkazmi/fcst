@@ -1,0 +1,118 @@
+<?php
+$this->headTitle('Sign in');
+
+$this->mainMenu()->setActiveItemId('login');
+
+$form->get('email')->setAttributes([
+    'class'=>'uk-input', 
+    'placeholder'=>'Email address',
+    'required' => true,
+    'autofocus' => true
+    ])
+    ->setLabelAttributes([
+        'class' => 'sr-only'
+    ]);
+
+$form->get('password')->setAttributes([
+    'class'=>'uk-input', 
+    'placeholder'=>'Password',
+    'required' => true,
+    ])
+    ->setLabelAttributes([
+        'class' => 'sr-only'
+    ]);
+?>
+
+<div uk-height-viewport="" class="uk-flex uk-flex-middle" style="min-height: calc(100vh);">
+        <div class="uk-width-2-3@m uk-width-1-2@s m-auto rounded">
+            <div class="uk-child-width-1-2@m uk-grid-collapse bg-gradient-grey uk-grid" uk-grid="">
+
+                <!-- column one -->
+                <div class="uk-margin-auto-vertical uk-text-center uk-animation-scale-up p-3 uk-light uk-first-column">
+                    <img src="/assets/images/logo.png">
+                    <h3 class="mb-4"> </h3>
+                    <p>The Place You can learn Every Thing. </p>
+                </div>
+
+                <!-- column two -->
+                
+              <div class="uk-card-default p-5 rounded">
+                <div class="mb-4 uk-text-center">
+                    <h3 class="mb-0"> Welcome back</h3>
+                    <p class="my-2">Login to manage your account.</p>
+                </div>
+                <form method="post">
+                    <?php if ($isLoginError): ?>
+                        <div class="alert alert-warning" role="alert">
+                            Incorrect login and/or password. 
+                            <a href="<?= $this->url('reset-password') ?>">Forgot password?</a>
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="uk-form-group">
+                        <label class="uk-form-label"> Email</label>
+
+                        <div class="uk-position-relative w-100">
+                            <span class="uk-form-icon">
+                                <i class="icon-feather-mail"></i>
+                            </span>
+                            <?= $this->formElement($form->get('email')); ?>
+                        </div>
+
+                    </div>
+
+                    <div class="uk-form-group">
+                        <label class="uk-form-label"> Password</label>
+
+                        <div class="uk-position-relative w-100">
+                            <span class="uk-form-icon">
+                                <i class="icon-feather-lock"></i>
+                            </span>
+                            <?= $this->formElement($form->get('password')); ?>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4 uk-flex-middle uk-grid-small" uk-grid>
+                        <div class="uk-width-expand@s">
+                            
+                        </div>
+                        <div class="uk-width-auto@s">
+                            <button type="submit" class="btn btn-default">Get Started</button>
+                        </div>
+                    </div>
+                    <?= $this->formElement($form->get('redirect_url')); ?>
+                    <?= $this->formElement($form->get('csrf')) ?>
+                </form>
+            </div>
+                
+                <!--  End column two -->
+
+            </div>
+        </div>
+    </div>
+<!-- <div class="row">
+    <div class="col-md-offset-4 col-md-3">
+        <form class="form-signin" method="post">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <?php if ($isLoginError): ?>
+            <div class="alert alert-warning" role="alert">
+                Incorrect login and/or password. 
+                <a href="<?= $this->url('reset-password') ?>">Forgot password?</a>
+            </div>
+            <?php endif; ?>
+            <?= $this->formLabel($form->get('email')); ?>
+            <?= $this->formElement($form->get('email')); ?>
+            <?= $this->formLabel($form->get('password')); ?>
+            <?= $this->formElement($form->get('password')); ?>
+            <div class="checkbox">
+                <label>
+                    <?= $this->formElement($form->get('remember_me')); ?> Remember me
+                </label>
+            </div>
+            <?= $this->formElement($form->get('redirect_url')); ?>
+            <?= $this->formElement($form->get('csrf')) ?>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+    </div>
+</div> !-->

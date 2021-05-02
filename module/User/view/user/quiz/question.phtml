@@ -1,0 +1,166 @@
+    <div class="section-small bg-white uk-visible@s">
+        
+        <hr>
+        <!-- Toggle sidebar button -->
+
+        
+
+        <!-- course section title -->
+
+        <div class="uk-container-small uk-margin-auto uk-margin-medium-top">
+            <h3 class=" uk-text-light"> Quiz for <?php echo $this->quiz->getCourses()->getTitle(); ?> </h3>
+        </div>
+
+    </div>
+
+<form action="" method="POST">
+    <div class="uk-container-small uk-padding-small uk-margin-auto">
+        <!-- to connect  video-slider and list tab use id video-slider -->
+        <ul id="video-slider" class="uk-switcher uk-position-relative uk-margin-medium-bottom">
+            <!--  Lesson one -->
+            <?php 
+            $count = 1;
+            foreach($this->questions as $question) :
+                $answers = json_decode($question->getAnswers(), true);
+            ?>
+                <li>
+                    <p class="uk-margin-medium-top uk-text-medium uk-visible@s"> <strong>Question <?php echo $count++ ?>: <?php echo  $question->getQuestion()?></strong></p>
+
+                    <div class=" uk-animation-scale-up">
+                        <?php 
+                            if($answers) :
+                                foreach($answers as $key=>$answer) :
+                        ?>
+                                    <label><input class="uk-radio" value="<?php echo $key ?>" type="radio" name="answer[<?php echo $question->getId() ?>]" checked> <?php echo $answer ?></label></p>
+                        <?php 
+                                endforeach;
+                            endif;
+                        ?>
+                    </div>
+
+                    <!-- slider video button-->
+                    <div class="uk-flex uk-flex-between  uk-animation-slide-bottom my-4">
+                        <?php 
+                        if($count > 2):
+                        ?>
+                            <button type="button" class="btn btn-default icon-label" uk-switcher-item="previous">
+                                <span class="inner-icon"><i class="icon-feather-chevron-left"></i></span>
+                                <span class="inner-text"> Previous </span>
+                            </button>
+                        <?php
+                        endif;
+                        ?>
+
+                        <?php 
+                        if($count-1 == sizeof($this->questions)):
+                        ?>
+                            <button type="submit" class="btn btn-default icon-label">
+                                <span class="inner-text"> Submit </span>
+                            </button>
+                        <?php
+                        else:
+                        ?>
+                            <button type="button" class="btn btn-default icon-label" uk-switcher-item="next">
+                                <span class="inner-text">Next</span>
+                                <span class="inner-icon"><i class="icon-feather-chevron-right"></i></span>
+                            </button>
+                        <?php
+                        endif;
+                        ?>
+                    </div>
+
+                </li>
+            <?php
+            endforeach;
+            ?>
+           
+        </ul>
+
+    </div>
+</form>
+
+    <!-- Sidebar-->
+    <div id="open-side-course" uk-offcanvas="overlay: true">
+        <div class="uk-offcanvas-bar p-0 uk-overflow-hidden">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+            <h4 class="bg-gradient-grey text-white py-4 p-3 mb-0"> HTML Basics</h4>
+
+            <ul class="uk-switcher uk-overflow-hidden">
+
+                <!-- first tab -->
+
+                <li>
+                    <div class="vidlist-3-content" data-simplebar>
+
+                        <ul class="vidlist-3-section" uk-accordion>
+                            <!--  section 1  -->
+                            <li class="uk-open">
+                               
+                                <div class="uk-accordion-content">
+                                    <!-- vidlist -->
+                                    <ul class="vidlist-3"
+                                        uk-switcher="connect: #video-slider ; animation: uk-animation-slide-right-small, uk-animation-slide-left-medium">
+                                        <?php 
+                                        $count = 1;
+                                        foreach($this->questions as $question) :
+                                           $class = 1 == $count ? 'uk-active' : '';
+                                        ?>
+                                            <li class="<?php echo $class ?>">
+                                                <a href="#"> </a>
+                                            </li>
+                                        <?php 
+                                        endforeach;
+                                        ?>   
+                                    </ul>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+    <!-- For Night mode -->
+    <script>
+        (function (window, document, undefined) {
+            'use strict';
+            if (!('localStorage' in window)) return;
+            var nightMode = localStorage.getItem('gmtNightMode');
+            if (nightMode) {
+                document.documentElement.className += ' night-mode';
+            }
+        })(window, document);
+
+
+        (function (window, document, undefined) {
+
+            'use strict';
+
+            // Feature test
+            if (!('localStorage' in window)) return;
+
+            // Get our newly insert toggle
+            var nightMode = document.querySelector('#night-mode');
+            if (!nightMode) return;
+
+            // When clicked, toggle night mode on or off
+            nightMode.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.documentElement.classList.toggle('night-mode');
+                if (document.documentElement.classList.contains('night-mode')) {
+                    localStorage.setItem('gmtNightMode', true);
+                    return;
+                }
+                localStorage.removeItem('gmtNightMode');
+            }, false);
+
+        })(window, document);
+    </script>
+

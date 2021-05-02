@@ -1,0 +1,110 @@
+<?php 
+if($courses):
+?>
+    <a href="<?php echo $this->basePath('/courses'); ?>">Go back to list</a>
+    <div class="page-content">
+        <div class="course-details-wrapper topic-1 uk-light pt-5">
+            <div class="container p-sm-0">
+                <div uk-grid>
+                    <div class="uk-width-2-3@m">
+                        <div class="course-details">
+                            <h1> <?php echo $courses['course']->getTitle() ?></h1>
+                            <p> <?php echo $courses['course']->getDescription() ?></p>
+
+                        <div class="course-details-info">
+                            <ul>
+                                <li> <i class="icon-feather-sliders"></i> CPD Units: <?php echo $courses['course']->getCpdUnits() ?> </li>
+                                <li><i class="icon-feather-sliders"></i> Duration: <?php echo $courses['course']->getDuration() ?> </li>
+                            </ul>
+                        </div>
+                        </div>
+                    <nav class="responsive-tab style-5">
+                        <ul
+                            uk-switcher="connect: #course-intro-tab ;animation: uk-animation-slide-right-medium, uk-animation-slide-left-medium">
+                            <li><a href="#">Curriculum</a></li>
+                        </ul>
+                    </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+
+        <div class="uk-grid-large mt-4" uk-grid>
+            <div class="uk-width-2-3@m">
+                <ul id="course-intro-tab" class="uk-switcher mt-4">
+                    <!-- course Curriculum-->
+                    <li>
+                        <ul class="course-curriculum" uk-accordion="multiple: true">
+                            <?php
+                                $moduleCount = 0;
+                                $courses = $this->courses;
+                                unset($courses['course']);
+                                if($courses) :
+                                    foreach($courses as $course) :
+                                        $moduleCount++;
+                                ?>
+                            <li class="uk-open">
+                                <a class="uk-accordion-title" href="#"> <h5><?php echo $course['name'] ?></h5> </a>
+                                <div class="uk-accordion-content">
+                                    <?php 
+                                        if($course) :
+                                            foreach($course['videos'] as $video) :
+                                    ?>
+                                    <!-- course-video-list -->
+                                    <ul class="course-curriculum-list">
+                                        <li><?php echo $video->getTitle()?>
+                                    </ul>
+                                <?php
+                                        endforeach;
+                                    endif;
+                                ?>
+                                </div>
+                            </li>
+                                <?php 
+                                    endforeach;
+                                endif;
+                                ?>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        <div class="uk-width-1-3@m">
+            <div class="course-card-trailer" uk-sticky="top: 10 ;offset:95 ; media: @m ; bottom:true">
+                <div class="p-3">
+                <div class="uk-child-width-1-2 uk-grid-small mb-4" uk-grid>
+                    <div>
+                        <a href="<?php echo $this->basePath('/courses/course/' . $this->courses['course']->getId()); ?>"
+                            class="uk-width-1-1 btn btn-default transition-3d-hover"> <i
+                                class="uil-play"></i> Start </a>
+                    </div>
+                    </div>
+
+                    <p class="uk-text-bold"> This Course Includes </p>
+
+                    <div class="uk-child-width-1-2 uk-grid-small" uk-grid>
+                        
+                        <div>
+                            <span> <i class="uil-file-alt"></i> <?php echo $moduleCount ?> Modules</span>
+                        </div>
+                    
+                        <div>
+                            <span> <i class="uil-award"></i> Certificate </span>
+                        </div>
+                        <div>
+                            <span> <i class="uil-clock-five"></i><?php echo $this->courses['course']->getDuration() ?> hours video </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php
+else:
+?>
+    <div class="text-danger">No modules or vidios associated to the course.</div>
+    <a href="/courses">Go back to list</a>
+<?php 
+endif;
+?>

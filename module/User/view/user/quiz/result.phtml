@@ -1,0 +1,25 @@
+<div class="page-content">
+	<div class="container">
+		<div class="section-small bg-white uk-visible@s">
+			<?php 
+			if($this->percentage >= 50) :
+			?>
+			<div class="congrats">
+				<h1>Congratulations!</h1>
+				<h3>You have passed the test</h3>
+			</div>
+			<a href="/courses/certificate/<?php echo $this->course_id ?>" class="btn btn-primary float-right">Download Certificate</a>
+			<?php 
+			else :
+			?>
+			<div class="congrats">
+				<h1 class="text-danger">Fail!</h1>
+				<h3>Please re-take the course</h3>
+			</div>
+			<?php
+			endif;
+			?>
+			
+		</div>
+	</div>
+</div>

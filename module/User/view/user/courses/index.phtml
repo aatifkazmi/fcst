@@ -1,0 +1,50 @@
+
+        <div class="page-content">
+
+
+            <div class="container">
+
+                <h1> Courses </h1>
+
+                <h4> Browse Courses </h4>
+
+                
+                <div class="uk-grid-large" uk-grid>
+                    <div class="uk-width-3-4@m">
+                        
+                        <?php 
+                        if($this->courses) :
+                            foreach($this->courses as $course) :
+                        ?>
+                            <div class="course-card course-card-list">
+                                <div class="course-card-thumbnail">
+                                    <img src="<?php echo $this->basePath('/images/course/'.$course->getId().'.png'); ?>">
+                                    <a href="<?php echo $this->basePath('/courses/view/' . $course->getId()); ?>" class="play-button-trigger"></a>
+                                </div>
+                                <div class="course-card-body">
+                                    <a href="<?php echo $this->basePath('/courses/view/' . $course->getId()); ?>">
+                                        <h4><?php echo $course->getTitle() ?></h4>
+                                    </a>
+                                    <p><?php echo $course->getDescription() ?></p>
+                                    <div class="course-details-info">
+                                        <ul>
+                                            <li> <i class="icon-feather-sliders"></i> CPD Units: <?php echo $course->getCpdUnits() ?> </li>
+                                            <li><i class="icon-feather-sliders"></i> Duration: <?php echo $course->getDuration() ?>  </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        <?php 
+                        endforeach;
+                    endif;
+                    ?>
+                    </div>
+                    
+                </div>
+
+
+            </div>
+
+        </div>
+

@@ -1,0 +1,32 @@
+<div class="uk-card-default bg-gradient-grey p-4 uk-light uk-hidden@s">
+        <div class="uk-flex uk-flex-between uk-flex-middle">
+            <h4 class="mb-0">  Quiz for <?php echo $this->quiz->getCourses()->getTitle(); ?> </h4>
+            <i class="icon-feather-video icon-small"  uk-toggle="target: #open-side-course"></i>
+        </div>
+    </div>
+
+
+    <div class="section-small bg-white uk-visible@s">
+        
+        <hr>
+
+        <!-- course section title -->
+
+        <div class="uk-container-small uk-margin-auto uk-margin-medium-top">
+            <h3 class=" uk-text-light"> Quiz for <?php echo $this->quiz->getCourses()->getTitle(); ?> </h3>
+        </div>
+
+    </div>
+
+
+    <div class="uk-container-small uk-padding-small uk-margin-auto">
+
+        <p class="uk-margin-medium-top uk-text-medium uk-visible@s"> <?php echo $this->quiz->getInstructions(); ?></p>
+        <div class="uk-flex uk-flex-right  uk-animation-slide-bottom my-4">
+            <a href="<?php echo $this->basePath('/quiz/question/' . $this->quiz->getCourses()->getId()); ?>" class="btn btn-default icon-label">
+                <span class="inner-text">Start Quiz</span>
+                <span class="inner-icon"><i class="icon-feather-chevron-right"></i></span>
+            </a>
+        </div>
+        
+    </div>
